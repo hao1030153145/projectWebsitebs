@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?><!--Converted at: Fri Feb 20 23:34:39 CST 2015-->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="gatherExpMapper">
+    <!-- TODO: 在这里定义各种sql语句，用法请参考iBATIS文档 -->
+
+    <!-- 获得需求的数量 -->
+    <select id="getRequireCount" resultType="java.lang.Integer">
+        SELECT count(id)
+        FROM `require`
+    </select>
+
+    <!-- 根据分页条件获得需求 -->
+    <select id="getRequire" resultType="com.lianNLP.website.web.po.RequirePO"
+            parameterType="java.util.Map">
+        SELECT `require`,nick_name as nickName,phone,weixin
+        FROM `require`
+        limit #{page},#{size}
+    </select>
+
+    <!-- 保存需求 -->
+    <insert id="saveRequire" parameterType="com.lianNLP.website.web.po.RequirePO">
+        INSERT INTO `require` (`require`, `nick_name`, `phone`, `weixin`)
+        VALUES(
+            #{require},
+            #{nickName},
+            #{phone},
+            #{weixin}
+        )
+    </insert>
+
+
+</mapper>
